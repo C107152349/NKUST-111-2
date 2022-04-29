@@ -1,27 +1,29 @@
 const readdata = document.getElementById("readdata");
+const select = document.getElementById("select_year");
 
-load_data("./data/TaiChung_111_04_19.json");
-function load_data(url){
-    //從"./data/11007.json"讀取data
-    fetch(url,{method:'GET'}).then(response =>{
-        //回傳json檔
-        return response.json();
-    }).then(result =>{
-        //讀取回傳json至result，json預設照時間排序
-        //更新index.html
-        readdata.innerHTML = update(result);
+select.addEventListener('change', () => {
+    const data_url = "./data/102_110/" + select.value + ".json";
+    fetch(data_url)
+        .then(res => {
+            let data = res.json();
+            return data;
+        })
+        .then(data => {
+            //console.log(data);
+            readdata.innerHTML = update(data);
     })
-}
+})
 function update(data){
-    let htmlstr =``
-    data.forEach(element =>{
+    let htmlstr = ``;
+    data.forEach(element => {
+        console.log(element);
         htmlstr = htmlstr + `
         <div align ="center">
             <p> 
-                案號:${element["案號"]}
-                ${element["發生日期"]}<br/>
-                ${element["地址"]}<br/>
-                起:${element["起"]} 訖:${element["訖"]}
+                ${element["site_id"]}<br/>
+                人口數:${element["people_total"]}<br/>
+                面積:${element["area"]}平方公里<br/>
+                人口密度:${element["population_density"]}
             </p>
         </div>
         `;
