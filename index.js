@@ -2,8 +2,24 @@ const readdata = document.getElementById("readdata");
 const select = document.getElementById("select_year");
 const btn = document.getElementById("btn");
 let data_global;
-let map;
-initmap();
+
+
+
+var map = L.map('mapid').setView([23.683234, 120.1825975], 8);
+
+var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 13,
+    minZoom: 8,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1
+}).addTo(map);
+$.getJSON('./data/TOWN_MOI_1100415.json', function(r){
+    L.geoJSON(r, {color: '#333'}).addTo(map);
+});
+
 select.addEventListener('change', () => {
     const data_url = "./data/102_110/" + select.value + ".json";
     const xhr = new XMLHttpRequest;
@@ -18,17 +34,7 @@ select.addEventListener('change', () => {
 btn.addEventListener('click', () => {
     console.log(data_global);
 })
-function initmap() {
-    let mapOptions = {
-        center: new google.maps.LatLng(25.04674, 121.54168),
-        zoom: 13,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    const map_url = "./data/TOWN_MOI_1100415.json";
-    let mapElement = document.getElementById("mapDiv");
-    map = new google.maps.Map(mapElement, mapOptions);
-    map.data.loadGeoJson(map_url);
-}
+
 function update(data){
     let htmlstr = ``;
     data.forEach(element => {
