@@ -31,9 +31,9 @@ select.addEventListener('change', () => {
     }
     
 })
-btn.addEventListener('click', () => {
-    console.log(data_global);
-})
+// btn.addEventListener('click', () => {
+//     console.log(data_global);
+// })
 
 function update(data){
     let htmlstr = ``;
