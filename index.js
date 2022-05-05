@@ -77,9 +77,7 @@ select.addEventListener('change', () => {
         readdata.innerHTML = update(data);
         draw(data);
     }
-    
 })
-
 function update(data){
     let htmlstr = ``;
     data.forEach(element => {
