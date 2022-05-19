@@ -1,8 +1,11 @@
 const readdata = document.getElementById("readdata");
 const select = document.getElementById("select_year");
-
+const search_bar_element = document.getElementById("search_bar")
+let search_bar;
 let geoJsons_global = [];
-
+let obj;
+let data;
+let req;
 let map = L.map('mapid').setView([23.683234, 120.1825975], 8);
 let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 13,
@@ -24,7 +27,7 @@ function getColor(d) {
                       '#FFEDA0';
 }
 function first_draw() {
-    let req = new XMLHttpRequest();
+    req = new XMLHttpRequest();
     req.open('GET', './data/TOWN_MOI_1100415.json');
     req.send()
     req.onload = function () {
@@ -35,11 +38,7 @@ function first_draw() {
     }
 }
 function draw(data) {
-    let req = new XMLHttpRequest();
-    req.open('GET', './data/TOWN_MOI_1100415.json');
-    req.send()
-    req.onload = function () {
-        let obj = JSON.parse(req.responseText);
+        obj = JSON.parse(req.responseText);
         geoJsons_global.forEach(geoJson => {
             map.removeLayer(geoJson);
         });
@@ -60,7 +59,6 @@ function draw(data) {
             geoJsons_global.push(geoJson);
         });
         //console.log(obj.features[0].properties.COUNTYNAME + obj.features[0].properties.TOWNNAME);
-    }
 }
 
 // $.getJSON('./data/TOWN_MOI_1100415.json', function(r){
@@ -73,17 +71,21 @@ select.addEventListener('change', () => {
     xhr.open("get", data_url, true);
     xhr.send();
     xhr.onload = function () {
-        let data = JSON.parse(xhr.responseText);
-        readdata.innerHTML = update(data);
+        data = JSON.parse(xhr.responseText);
+        // readdata.innerHTML = update(data);
         draw(data);
     }
+    search_bar_element.innerHTML = `<div class="autocomplete" style="width:300px;">
+                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區...">
+                                    </div>
+                                    <input type="button" value="送出" onclick="show_site()">`
 })
 function update(data){
     let htmlstr = ``;
     data.forEach(element => {
         htmlstr = htmlstr + `
-        <div align ="center">
-            <p> 
+        <div style = "display:inline;">
+            <p>
                 ${element["site_id"]}<br/>
                 人口數:${element["people_total"]}<br/>
                 面積:${element["area"]}平方公里<br/>
@@ -94,4 +96,35 @@ function update(data){
     })
     //回傳更新後字串
     return htmlstr;
+}
+function autocomplete(inp, site_names) {
+    
+}
+function show_site() {
+    inp_site = document.getElementById("myInput").value;
+    const site_info = document.getElementById("info");
+    let htmlstr = ``;
+    data.forEach(e => {
+        if (e.site_id.search(inp_site) != -1) {
+            htmlstr = htmlstr + `
+            <div style="display:inline;">
+                <button class="btn" id="btn">${e["site_id"]}</button>
+            </div>
+            `
+            // htmlstr = htmlstr + `
+            // <div align = "center" id="site_info" style="display:inline;">
+            //     <p>
+            //         ${e["site_id"]}<br/>
+            //         人口數:${e["people_total"]}<br/>
+            //         面積:${e["area"]}平方公里<br/>
+            //         人口密度:${e["population_density"]}
+            //     </p>
+            // </div>
+            // `;
+        }
+    })
+    site_info.innerHTML = htmlstr;
+    // obj.features.forEach(element => {
+    //     console.log(element.properties);
+    // });
 }
