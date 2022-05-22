@@ -4,15 +4,17 @@
     /* margin-right:28%; */
     float: right;
 }
-#site_info{
+#info{
     width:200px;
     line-height:20px;
     width: 10%;
-    border:2px black solid;
     margin-right:6%;
     float: left;
 }
-#btn{
+#input{
+    width:150px;
+    height:50px;
+    border:0;
     background-color: green;
     color: #fff;
     cursor: pointer;
