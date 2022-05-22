@@ -8,7 +8,7 @@ let data;
 let req;
 let map = L.map('mapid').setView([23.683234, 120.1825975], 8);
 let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 13,
+    maxZoom: 12,
     minZoom: 8,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -76,9 +76,11 @@ select.addEventListener('change', () => {
         draw(data);
     }
     search_bar_element.innerHTML = `<div class="autocomplete" style="width:300px;">
-                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區...">
+                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區..." focus>
                                     </div>
-                                    <input type="button" value="送出" onclick="show_site()">`
+                                    <button class="btn" id="btn" onclick="show_site()">送出</button>
+                                    `;
+    document.getElementById("myInput").focus();
 })
 function update(data){
     let htmlstr = ``;
@@ -102,14 +104,24 @@ function autocomplete(inp, site_names) {
 }
 function show_site() {
     inp_site = document.getElementById("myInput").value;
+    if (inp_site == '')
+        return;
     const site_info = document.getElementById("info");
     let htmlstr = ``;
     data.forEach(e => {
         if (e.site_id.search(inp_site) != -1) {
             htmlstr = htmlstr + `
-            <div style="display:inline;">
-                <button class="btn" id="btn">${e["site_id"]}</button>
+            <div>
+                <input type="submit" style="
+                width:150px;
+                height:50px;
+                border:1;
+                background-color: green;
+                color: #fff;
+                cursor: pointer;"
+                value ="${e["site_id"]}">
             </div>
+            </br>
             `
             // htmlstr = htmlstr + `
             // <div align = "center" id="site_info" style="display:inline;">
