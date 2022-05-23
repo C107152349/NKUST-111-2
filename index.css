@@ -1,34 +1,37 @@
 #mapid { 
     height: 800px; 
     width: 800px;
-    float: right;
+    margin-left: 23%;
 }
 #info{
-    width:200px;
+    width:100%;
     line-height:20px;
-    width: 10%;
-    margin-right:6%;
-    float: left;
+    margin-left: 2%;
 }
-#input{
-    width:150px;
-    height:50px;
-    border:0;
-    background-color: green;
-    color: #fff;
-    cursor: pointer;
+#dropdownMenu2{
+    margin-top: 5px;
 }
+.btn.btn-secondary.dropdown-toggle{
+    margin-top: 5%;
+}
+
 #btn{
-    padding: 5px 7px;
-    margin-left: -2.5%;
+    height:26px;
+    width: 30px;
+    margin-left: -10px;
+    margin-top: -3.5px;
     border:none;
     border-radius: 2px;
-    border-bottom-left-radius: 0%;
-    border-top-left-radius: 0%;
     background-color: darkgreen;
-    cursor:pointer
+    cursor:pointer;
+}.fa.fa-search{
+    font-size: 15px;
+    color: aliceblue;
+    float: left;
+    margin-left:-4px;
 }
+
 #myInput{
     margin-right: 2%;
-    height: 20px;
+    height:25px;
 }

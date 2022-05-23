@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="./bootstrap_css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="./bootstrap_css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
     <link rel="stylesheet" type="text/css" href="./index.css">
     <script src="https://kit.fontawesome.com/d23ea7675c.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- <script src="./bootstrap_js/popper.min.js"></script>
-    <script src="./bootstrap_js/bootstrap.min.js"></script> -->
+    <script src="./bootstrap_js/popper.min.js"></script>
+    <script src="./bootstrap_js/bootstrap.min.js"></script>
+    <script src="./some_cool_func.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -32,11 +33,20 @@
     </br>
         <div id="search_bar"></br></div>
     </div>
-</br>
-    <div id="info"></div>
+    </br>
+    <form class="dropdown" id="info"></form>
+    </br>
+    <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><button class="dropdown-item" type="button">Action</button></li>
+          <li><button class="dropdown-item" type="button">Another action</button></li>
+          <li><button class="dropdown-item" type="button">Something else here</button></li>
+        </ul>
+    </div> -->
     <div id="mapid"></div>
-    <div style="clear:both;"></div>
-    <!-- <button class="btn" id="btn">btn</button> -->
     <script src="./index.js"></script>
 </body>
 </html>

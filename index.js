@@ -107,43 +107,21 @@ function update(data){
     return htmlstr;
 }
 function autocomplete(inp, site_names) {
+}
+function pick_site(obj) {
     
+    console.log(obj.value);
 }
 function show_site() {
-    inp_site = document.getElementById("myInput").value;
+    let htmlstr;
+    const site_info = document.getElementById("info");
+    const inp_site = document.getElementById("myInput").value;
     if (inp_site == '')
         return;
-    const site_info = document.getElementById("info");
-    let htmlstr = ``;
-    data.forEach(e => {
-        if (e.site_id.search(inp_site) != -1) {
-            htmlstr = htmlstr + `
-            <div>
-                <input type="submit" style="
-                width:150px;
-                height:50px;
-                border:1;
-                background-color: green;
-                color: #fff;
-                cursor: pointer;"
-                value ="${e["site_id"]}">
-            </div>
-            </br>
-            `
-            // htmlstr = htmlstr + `
-            // <div align = "center" id="site_info" style="display:inline;">
-            //     <p>
-            //         ${e["site_id"]}<br/>
-            //         人口數:${e["people_total"]}<br/>
-            //         面積:${e["area"]}平方公里<br/>
-            //         人口密度:${e["population_density"]}
-            //     </p>
-            // </div>
-            // `;
-        }
-    })
+    htmlstr = site_class(data, inp_site);
     site_info.innerHTML = htmlstr;
     // obj.features.forEach(element => {
     //     console.log(element.properties);
     // });
 }
+console.log("搜尋'all'可列出所有地區");
