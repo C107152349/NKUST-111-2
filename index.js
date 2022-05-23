@@ -75,12 +75,19 @@ select.addEventListener('change', () => {
         // readdata.innerHTML = update(data);
         draw(data);
     }
-    search_bar_element.innerHTML = `<div class="autocomplete" style="width:300px;">
-                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區..." focus>
+    search_bar_element.innerHTML = `</br>
+                                    <div class="autocomplete"">
+                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區...">
+                                        <button class="btn" id="btn" onclick="show_site()"><i class="fa fa-search"></i></button>
                                     </div>
-                                    <button class="btn" id="btn" onclick="show_site()">送出</button>
                                     `;
-    document.getElementById("myInput").focus();
+    search_bar = document.getElementById("myInput");
+    search_bar.focus();
+    search_bar.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            show_site();
+        }
+    })
 })
 function update(data){
     let htmlstr = ``;

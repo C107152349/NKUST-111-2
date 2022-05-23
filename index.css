@@ -1,7 +1,6 @@
 #mapid { 
     height: 800px; 
     width: 800px;
-    /* margin-right:28%; */
     float: right;
 }
 #info{
@@ -18,4 +17,18 @@
     background-color: green;
     color: #fff;
     cursor: pointer;
+}
+#btn{
+    padding: 5px 7px;
+    margin-left: -2.5%;
+    border:none;
+    border-radius: 2px;
+    border-bottom-left-radius: 0%;
+    border-top-left-radius: 0%;
+    background-color: darkgreen;
+    cursor:pointer
+}
+#myInput{
+    margin-right: 2%;
+    height: 20px;
 }
