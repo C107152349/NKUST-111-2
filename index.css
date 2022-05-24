@@ -1,12 +1,23 @@
 #mapid { 
-    height: 800px; 
-    width: 800px;
-    margin-left: 23%;
+    height: 900px; 
+    width: 900px;
+}
+#container_map{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+.leaflet-control-zoom.leaflet-bar.leaflet-control{
+    margin-top: 800px;
 }
 #info{
-    width:100%;
+    width:900px;
     line-height:20px;
-    margin-left: 2%;
+}
+#container_info{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 #dropdownMenu2{
     margin-top: 5px;
@@ -14,7 +25,6 @@
 .btn.btn-secondary.dropdown-toggle{
     margin-top: 5%;
 }
-
 #btn{
     height:26px;
     width: 30px;
