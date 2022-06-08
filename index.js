@@ -6,7 +6,12 @@ let geoJsons_global = [];
 let obj;
 let data;
 let req;
-let map = L.map('mapid').setView([23.683234, 120.1825975], 8);
+let map;
+try {
+    map = L.map('mapid').setView([23.683234, 120.1825975], 8);
+} catch (error) {
+    console.log(error);
+}
 let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 12,
     minZoom: 8,
@@ -15,6 +20,7 @@ let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     id: 'mapbox/light-v9'
 }).addTo(map);
 let draw_the_site = [L.polygon([]).addTo(map)]; //初始化，用來框出選擇的地區
+
 function getColor(d) {
     return d > 40000 ? '#800026' :
            d > 3000  ? '#BD0026' :
