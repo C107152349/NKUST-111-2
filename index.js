@@ -47,7 +47,7 @@ function onEachFeature(feature, layer) {
         let s = Object;
         s.value = feature.properties.COUNTYNAME + feature.properties.TOWNNAME;
         pick_site(s);
-        popup(e);
+        popup(s.value,e.latlng);
     })
 }
 function draw(data) {
@@ -135,6 +135,13 @@ function pick_site(s) {
                 draw_the_site = [];
                 let site_loca_oldarr = element.geometry.coordinates;
                 let site_loca_newarr = [];
+                let latlng;
+                if (site_loca_oldarr[0][0].length == 2) {
+                    latlng = [site_loca_oldarr[0][0][1], site_loca_oldarr[0][0][0]];
+                }
+                else {
+                    latlng = [site_loca_oldarr[0][0][0][1], site_loca_oldarr[0][0][0][0]];
+                }
                 site_loca_oldarr.forEach(arr => {
                     if (site_loca_oldarr.length == 1) {
                         site_loca_newarr.push(rev(arr));
@@ -146,13 +153,14 @@ function pick_site(s) {
                 site_loca_newarr.forEach(arr => {
                     draw_the_site.push(L.polygon([arr], {}).addTo(map));
                 })
+                popup(site,latlng)
             }
             
         });
     } catch {}
 }
-function popup(e) {
-    let site = e.sourceTarget.feature.properties.COUNTYNAME + e.sourceTarget.feature.properties.TOWNNAME;
+function popup(site,latlng) {
+    //let site = e.sourceTarget.feature.properties.COUNTYNAME + e.sourceTarget.feature.properties.TOWNNAME;
     try {
         let site_data = data.find(x => x.site_id === site);
         let year = site_data.statistic_yyy;
@@ -163,18 +171,17 @@ function popup(e) {
             + site + "</br>" + "總人口 : " + people_total + " 人</br>"
             + "面積 : " + area + " 平方公里</br>" + "人口密度 : " + population_density + " 人/km^2";
         console.log(content);
-        let popup = L.popup();
+        let popup = L.popup({closeButton: false});
         popup
-            .setLatLng(e.latlng)
+            .setLatLng(latlng)
             .setContent(content)
             .openOn(map);
     } catch { 
         let content = site;
-        let popup = L.popup();
-                    popup
-                        .setLatLng(e.latlng)
-                        .setContent(content)
-                        .openOn(map);
+        let popup = L.popup({closeButton: false});
+        popup.setLatLng(latlng)
+            .setContent(content)
+            .openOn(map);
     }
 }
 function show_site() {
