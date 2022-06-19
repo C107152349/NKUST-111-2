@@ -1,7 +1,7 @@
 const readdata = document.getElementById("readdata");
 const select = document.getElementById("select_year");
-const search_bar_element = document.getElementById("search_bar")
-let search_bar;
+let search_bar = document.getElementById("myInput");
+
 let geoJsons_global = [];
 let obj;
 let data;
@@ -20,7 +20,12 @@ let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     id: 'mapbox/light-v9'
 }).addTo(map);
 let draw_the_site = [L.polygon([]).addTo(map)]; //初始化，用來框出選擇的地區
-
+search_bar.focus();
+search_bar.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        show_site();
+    }
+})
 function getColor(d) {
     return d > 40000 ? '#800026' :
            d > 3000  ? '#BD0026' :
@@ -59,8 +64,6 @@ function draw(data) {
         obj.features.forEach(element => {
             
             let site = element.properties.COUNTYNAME + element.properties.TOWNNAME;
-            // console.log(site);
-            // console.log(data.find(x => x.site_id === site).population_density);
             let myStyle = {
             "fillColor": getColor(data.find(x => x.site_id === site).population_density),
             "color": "#100",
@@ -72,12 +75,8 @@ function draw(data) {
             geoJson.addTo(map);
             geoJsons_global.push(geoJson);
         });
-        //console.log(obj.features[0].properties.COUNTYNAME + obj.features[0].properties.TOWNNAME);
 }
 
-// $.getJSON('./data/TOWN_MOI_1100415.json', function(r){
-//     L.geoJSON(r, {color: '#333'}).addTo(map);
-// });
 first_draw();
 select.addEventListener('change', () => {
     const data_url = "./data/102_110/" + select.value + ".json";
@@ -86,23 +85,11 @@ select.addEventListener('change', () => {
     xhr.send();
     xhr.onload = function () {
         data = JSON.parse(xhr.responseText);
-        // readdata.innerHTML = update(data);
         draw(data);
     }
-    search_bar_element.innerHTML = `</br>
-                                    <div class="autocomplete"">
-                                        <input id="myInput" type="text" name="site_name" placeholder="輸入地區...">
-                                        <button class="btn" id="btn" onclick="show_site()"><i class="fa fa-search"></i></button>
-                                    </div>
-                                    `;
-    search_bar = document.getElementById("myInput");
     search_bar.focus();
-    search_bar.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            show_site();
-        }
-    })
     document.getElementById("info").innerHTML = "";
+    show_site();
 })
 function update(data){
     let htmlstr = ``;
@@ -142,18 +129,21 @@ function pick_site(s) {
                 else {
                     latlng = [site_loca_oldarr[0][0][0][1], site_loca_oldarr[0][0][0][0]];
                 }
+                
                 site_loca_oldarr.forEach(arr => {
                     if (site_loca_oldarr.length == 1) {
                         site_loca_newarr.push(rev(arr));
                     }
                     else if (site_loca_oldarr.length >= 1) {
                         site_loca_newarr.push(rev(arr[0]));
+                        
                     }
                 })
+                
                 site_loca_newarr.forEach(arr => {
                     draw_the_site.push(L.polygon([arr], {}).addTo(map));
                 })
-                popup(site,latlng)
+                popup(site, latlng);
             }
             
         });
@@ -190,9 +180,8 @@ function show_site() {
     const inp_site = document.getElementById("myInput").value;
     if (inp_site == '')
         return;
-    htmlstr = site_class(data, inp_site);
+    htmlstr = site_class(obj, inp_site);
     site_info.innerHTML = htmlstr;
-
 }
 function rev(arr) {
     let new_arr = [];

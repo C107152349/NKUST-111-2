@@ -22,36 +22,30 @@
         <h1> 
         臺灣人口密度
         </h1>
-        <select id="select_year" autofocus>
-            <option value="" disabled selected>選擇年份</option>
-            <option value="104">104</option>
-            <option value="105">105</option>
-            <option value="106">106</option>
-            <option value="107">107</option>
-            <option value="108">108</option>
-            <option value="109">109</option>
-            <option value="110">110</option>
-        </select>
-    </br>
-        <div id="search_bar"></br></div>
-    </br>
     </div>
-    <div class="container" id="container_info">
-    <form class="dropdown" id="info"></form>
-    </div>
-    </br>
-    <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button">Action</button></li>
-          <li><button class="dropdown-item" type="button">Another action</button></li>
-          <li><button class="dropdown-item" type="button">Something else here</button></li>
-        </ul>
+    
+    <!-- <div class="container" id="container_info">
+        
     </div> -->
     <div class="container" id="container_map">
-    <div id="mapid"></div>
+        <div id="select_search_info">
+            <select id="select_year" style="margin-left: 37%;">
+                <option value="" disabled selected>選擇年份</option>
+                <option value="104">104</option>
+                <option value="105">105</option>
+                <option value="106">106</option>
+                <option value="107">107</option>
+                <option value="108">108</option>
+                <option value="109">109</option>
+                <option value="110">110</option>
+            </select>
+            </br>
+            </br>
+            <input id="myInput" type="text" name="site_name" placeholder="輸入地區..."style="margin-left: 25%;">
+            <button class="btn" id="btn" onclick="show_site()"><i class="fa fa-search"></i></button>        
+            <form class="dropdown" id="info"></form>
+        </div>
+        <div id="mapid"></div>
     </div>
     <script src="./index.js"></script>
 </body>

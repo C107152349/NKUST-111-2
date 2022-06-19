@@ -1,18 +1,19 @@
 #mapid { 
-    height: 900px; 
-    width: 900px;
+    height: 750px; 
+    width: 1200px;
 }
 #container_map{
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: right; 
+    align-items: right; 
 }
 .leaflet-control-zoom.leaflet-bar.leaflet-control{
     margin-top: 800px;
 }
-#info{
-    width:900px;
+#select_search_info{
+    width:800px;
     line-height:20px;
+    float: left;
 }
 #container_info{
     display: flex;
